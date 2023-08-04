@@ -1,4 +1,5 @@
 ﻿using MemorialColetivo.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace MemorialColetivo
 {
@@ -12,7 +13,7 @@ namespace MemorialColetivo
         public void ConfigureServices(IServiceCollection services)    
         {
             //DbContext configuration
-            services.AddDbContext<AppDbContext>();
+            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString")));
 
             services.AddControllersWithViews();
         }
