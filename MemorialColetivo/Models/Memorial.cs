@@ -15,5 +15,7 @@ namespace MemorialColetivo.Models
         public string Religiao { get; set; }
         public string Hobbies { get; set; }
 
+        //Relationships
+        public List<Usuario_Memorial> Usuario_Memorial { get; set; }
     }
 }
