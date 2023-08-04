@@ -1,4 +1,6 @@
-﻿namespace MemorialColetivo
+﻿using MemorialColetivo.Data;
+
+namespace MemorialColetivo
 {
     public class Startup
     {
@@ -9,6 +11,9 @@
         public IConfiguration Configuration { get; }
         public void ConfigureServices(IServiceCollection services)    
         {
+            //DbContext configuration
+            services.AddDbContext<AppDbContext>();
+
             services.AddControllersWithViews();
         }
         public void Configure(WebApplication app, IWebHostEnvironment enviroment)
