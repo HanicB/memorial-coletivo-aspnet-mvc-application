@@ -15,7 +15,7 @@ namespace MemorialColetivo.Controllers
         public IActionResult Index()
         {
             var data = _context.Usuario.ToList();
-            return View();
+            return View(data);
         }
     }
 }

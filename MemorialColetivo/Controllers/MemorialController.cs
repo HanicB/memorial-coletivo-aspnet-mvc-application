@@ -14,8 +14,8 @@ namespace MemorialColetivo.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var allProducers = await _context.Memorial.ToListAsync();
-            return View();
+            var allMovies = await _context.Memorial.ToListAsync();
+            return View(allMovies);
         }
     }
 }
