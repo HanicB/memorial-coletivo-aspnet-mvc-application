@@ -1,4 +1,5 @@
 ﻿using MemorialColetivo.Data;
+using MemorialColetivo.Data.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 
@@ -6,15 +7,14 @@ namespace MemorialColetivo.Controllers
 {
     public class UsuariosController : Controller
     {
-        private readonly AppDbContext _context;
-
-        public UsuariosController(AppDbContext context)
+        private readonly IUsuariosService _service;
+        public UsuariosController(IUsuariosService service)
         {
-            _context = context;
+            _service = service;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var data = _context.Usuario.ToList();
+            var data = await _service.getAll();
             return View(data);
         }
     }

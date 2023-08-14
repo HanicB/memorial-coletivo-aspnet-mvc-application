@@ -1,4 +1,5 @@
 ﻿using MemorialColetivo.Data;
+using MemorialColetivo.Data.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace MemorialColetivo
@@ -14,6 +15,9 @@ namespace MemorialColetivo
         {
             //DbContext configuration
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString")));
+
+            //Services configuration
+            services.AddScoped<IUsuariosService, UsuariosService>();
 
             services.AddControllersWithViews();
         }
