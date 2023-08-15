@@ -6,11 +6,11 @@ namespace MemorialColetivo.Models
     {
         [Key]
         public int UsuarioID { get; set; }
-        [Display(Name = "Profile Picture URL")]
+        [Display(Name = "Link da foto de perfil")]
         public string ProfilePictureURL { get; set; }
-        [Display(Name = "Full Name")]
+        [Display(Name = "Nome completo")]
         public string FullName { get; set; }
-        [Display(Name = "Biography")]
+        [Display(Name = "Biografia")]
         public string Bio { get; set; }
 
         //Relationships

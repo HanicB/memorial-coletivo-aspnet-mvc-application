@@ -18,6 +18,7 @@ namespace MemorialColetivo
 
             //Services configuration
             services.AddScoped<IUsuariosService, UsuariosService>();
+            services.AddScoped<IMemorialService, MemorialService>();
 
             services.AddControllersWithViews();
         }
