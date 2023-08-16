@@ -7,7 +7,7 @@ namespace MemorialColetivo.Data.Services
         Task<IEnumerable<Memorial>> GetAllAsync();
         Task<Memorial> GetByIdAsync(int id);
         Task AddAsync(Memorial memorial);
-        Memorial Update(int id, Memorial newMemorial);
+        Task<Memorial> UpdateAsync(int id, Memorial newMemorial);
         void Delete(int id);
     }
 }

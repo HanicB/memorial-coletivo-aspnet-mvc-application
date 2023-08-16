@@ -33,9 +33,11 @@ namespace MemorialColetivo.Data.Services
             return result;
         }
 
-        public Memorial Update(int id, Memorial newMemorial)
+        public async Task<Memorial> UpdateAsync(int id, Memorial newMemorial)
         {
-            throw new NotImplementedException();
+            _context.Update(newMemorial);
+            await _context.SaveChangesAsync();
+            return newMemorial;
         }
     }
 }

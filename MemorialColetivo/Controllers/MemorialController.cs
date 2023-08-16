@@ -39,8 +39,29 @@ namespace MemorialColetivo.Controllers
         {
             var memorialDetails = await _service.GetByIdAsync(id);
 
-            if (memorialDetails == null) return View("Empty");
+            if (memorialDetails == null) return View("NotFound");
             return View(memorialDetails);
+        }
+
+
+        //Get: Memorial/Create
+        public async Task<IActionResult> Edit(int id)
+        {
+            var memorialDetails = await _service.GetByIdAsync(id);
+
+            if (memorialDetails == null) return View("NotFound");
+            return View(memorialDetails);
+        }
+            
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,MemorialPictureURL,Historia,DataFalecimento,Formacao,Religiao,Hobbies")] Memorial memorial)
+        {
+            if (ModelState.IsValid)
+            {
+                return View(memorial);
+            }
+            await _service.UpdateAsync(id, memorial);
+            return RedirectToAction(nameof(Index));
         }
 
     }
