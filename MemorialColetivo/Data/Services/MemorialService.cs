@@ -10,10 +10,10 @@ namespace MemorialColetivo.Data.Services
         {
             _context = context;
         }
-        public void Add(Memorial memorial)
+        public async Task AddAsync(Memorial memorial)
         {
-            _context.Memorial.Add(memorial);
-            _context.SaveChanges();
+            await _context.Memorial.AddAsync(memorial);
+            await _context.SaveChangesAsync();
         }
 
         public void Delete(int id)
@@ -21,15 +21,16 @@ namespace MemorialColetivo.Data.Services
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<Memorial>> GetAll()
+        public async Task<IEnumerable<Memorial>> GetAllAsync()
         {
             var result = await _context.Memorial.ToListAsync();
             return result;
         }
 
-        public Memorial GetById(int id)
+        public async Task<Memorial> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var result = await _context.Memorial.FirstOrDefaultAsync(n => n.Id == id);
+            return result;
         }
 
         public Memorial Update(int id, Memorial newMemorial)
