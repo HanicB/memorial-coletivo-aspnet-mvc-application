@@ -44,7 +44,7 @@ namespace MemorialColetivo.Controllers
         }
 
 
-        //Get: Memorial/Create
+        //Get: Memorial/Edit
         public async Task<IActionResult> Edit(int id)
         {
             var memorialDetails = await _service.GetByIdAsync(id);
@@ -61,6 +61,25 @@ namespace MemorialColetivo.Controllers
                 return View(memorial);
             }
             await _service.UpdateAsync(id, memorial);
+            return RedirectToAction(nameof(Index));
+        }
+
+        //Get: Memorial/Delete/1
+        public async Task<IActionResult> Delete(int id)
+        {
+            var memorialDetails = await _service.GetByIdAsync(id);
+
+            if (memorialDetails == null) return View("NotFound");
+            return View(memorialDetails);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var memorialDetails = await _service.GetByIdAsync(id);
+            if (memorialDetails == null) return View("NotFound");
+
+            await _service.DeleteAsync(id);
             return RedirectToAction(nameof(Index));
         }
 

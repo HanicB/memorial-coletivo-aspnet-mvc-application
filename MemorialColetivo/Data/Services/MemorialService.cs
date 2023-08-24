@@ -16,9 +16,11 @@ namespace MemorialColetivo.Data.Services
             await _context.SaveChangesAsync();
         }
 
-        public void Delete(int id)
+        public async Task DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            var result = await _context.Memorial.FirstOrDefaultAsync(n => n.Id == id);
+            _context.Memorial.Remove(result);
+            await _context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<Memorial>> GetAllAsync()

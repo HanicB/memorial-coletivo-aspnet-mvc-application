@@ -1,13 +1,13 @@
 ﻿@model Memorial
 
 @{
-    ViewData["Title"] = "Crie um novo memorial";
+    ViewData["Title"] = "Excluir memorial";
 }
 
 <div class="row text">
     <div class="col-md-8 offset-2">
         <p>
-            <h1>Memorial de @Model.Name</h1>
+            <h1>Confirmação de exclusão do memorial de @Model.Name</h1>
         </p>
         <div class="row">
             <div class="col-md-8 offset-2">
@@ -52,12 +52,11 @@
                         <span asp-validation-for="Hobbies" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <a class="btn btn-outline-success float-right" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
-                        <a class="btn btn-outline-secondary" asp-action="Index">Mostre todos</a>
                         <form asp-action="Delete">
-                            <input type="hidden" asp-for="Id" />
-                            <input type="submit" value="Confirm" class="btn btn-danger float-right" />
+                            <input type="hidden" asp-for="Id"/>
+                            <input type="submit" value="Confirm" class="btn btn-danger float-right"/>
                         </form>
+                        <a class="btn btn-outline-secondary" asp-action="Index">Mostre todos</a>
                     </div>
                 </form>
             </div>

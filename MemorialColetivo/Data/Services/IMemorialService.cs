@@ -8,6 +8,6 @@ namespace MemorialColetivo.Data.Services
         Task<Memorial> GetByIdAsync(int id);
         Task AddAsync(Memorial memorial);
         Task<Memorial> UpdateAsync(int id, Memorial newMemorial);
-        void Delete(int id);
+        Task DeleteAsync(int id);
     }
 }
