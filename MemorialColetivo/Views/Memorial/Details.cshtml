@@ -4,11 +4,60 @@
     ViewData["Title"] = "Crie um novo memorial";
 }
 
+<style>
+    .person-container {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        width: 500px;
+    }
+
+    .person-image {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: 10px;
+    }
+
+    .person-info {
+        flex: 1;
+    }
+
+    .person-name {
+        font-size: 30px;
+        margin-left: 20px;
+        margin-bottom: 5px;
+    }
+
+    .edit-button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        margin-left: 20px;
+        padding: 5px 10px;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+</style>
 <div class="row text">
-    <div class="col-md-8 offset-2">
-        <p>
-            <h1>Memorial de @Model.Name</h1>
-        </p>
+    <div style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
+        
+    <div style="width:75%;height:25%;">
+        <div class="form-group">
+                <div class="person-container">
+                    <img id="ProfilePicturePreview" style="max-width: 150px" />
+                    <div class="person-info">
+                        <div class="person-name">@Model.Name</div>
+                        <a class="btn btn-outline-success float-right edit-button" asp-action="Edit" asp-route-id="@Model.Id">Editar memorial</a>
+                        <a class="btn btn-outline-success float-right bi bi-share" asp-action="Edit" asp-route-id="@Model.Id"></a>
+                    </div>
+                </div>
+        </div>
+
+    </div>
+    </div>
+    <div class="col-md-8 offset-2" style="margin-top:100px;">
         <div class="row">
             <div class="col-md-8 offset-2">
                 <form asp-action="Create">
