@@ -24,6 +24,12 @@
         flex: 1;
     }
 
+    .btn-large {
+        width: 310px;
+        height: 60px;
+        font-size: 16px;
+    }
+
     .person-name {
         font-size: 30px;
         margin-left: 20px;
@@ -38,13 +44,14 @@
         padding: 5px 10px;
         border-radius: 3px;
         cursor: pointer;
+
     }
 </style>
 <div class="row text">
     <div style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
-    <div style="width:75%;height:25%;">
-        <div class="form-group">
-                <div class="person-container">
+        <div style="width:75%;height:25%;">
+            <div class="form-group">
+                <div class="person-container" style="margin-bottom:20px;">
                     <img id="ProfilePicturePreview" style="max-width: 150px" />
                     <div class="person-info">
                         <div class="person-name">@Model.Name</div>
@@ -52,62 +59,80 @@
                         <a class="btn btn-outline-success float-right bi bi-share" asp-action="Edit" asp-route-id="@Model.Id"></a>
                     </div>
                 </div>
-        </div>
+            </div>
+            <div class="row mb-3" style="margin-left: 150px;">
+                <div class="col-md-9">
+                    <div class="btn-group" role="group" aria-label="Selecionar modo">
+                        <button type="button" class="btn btn-primary btn-large">Biografia</button>
+                        <button type="button" class="btn btn-primary btn-large ">Memórias</button>
+                        <button type="button" class="btn btn-primary btn-large">Espaço de Homenagens</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Primeiro item -->
+            <div class="row mb-3" style="margin-left:150px;">
+                <div class="col-md-9">
+                    <div class=" border p-3">
+                        <div class="person-info">
+                            <div class="person-name">Historia</div>
+                            <h5 class="item-title mt-3 text-justify" style="margin-left:20px;">@Model.Historia</h5>
+                            <button class="edit-button" style="width:97%;">Ver mais sobre a historia de @Model.Name</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
+            <!-- Itens em formato de grade 2 por 2 -->
+            <div class="row" style="margin-left:150px;">
+                <div class="col-md-5">
+                    <div class="person-container">
+                        <div class="person-info">
+                            <div class="person-name">Informações básicas</div>
+                            <h5 class="item-title mt-3" style="margin-left:20px;">Data de nascimento: Não informado</h5>
+                            <h5 class="item-title mt-3" style="margin-left:20px;">Data de falecimento: @Model.DataFalecimento</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5" style="margin-left:50px;max-width:100px;">
+                    <div class="person-container" >
+                        <div class="person-info">
+                            <div class="person-name" style="margin-left:20px;">Formações</div>
+                            <h5 class="item-title mt-3" style="margin-left:20px;">Arquitetura de ambientes, USP</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-left:150px;">
+                <div class="col-md-5">
+                    <div class="person-container">
+                        <div class="person-info">
+                            <div class="person-name">Religião</div>
+                            <h5 class="item-title mt-3" style="margin-left:20px;">Não possuia religião</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5" style="margin-left:50px;max-width:100px;">
+                    <div class="person-container">
+                        <div class="person-info">
+                            <div class="person-name" style="margin-left:20px;">Hobbies</div>
+                            <h5 class="item-title mt-3" style="margin-left:20px;">Ler livros</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Repita este bloco para cada par de itens -->
+        </div>
     </div>
-    </div>
-    <div class="col-md-8 offset-2" style="margin-top:100px;">
+</div>
+
+<div class="col-md-8 offset-2" style="margin-top:1000px; margin-bottom:1000px;">
         <div class="row">
             <div class="col-md-8 offset-2">
-                <form asp-action="Create">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <div class="form-group text-center">
-                        <img id="ProfilePicturePreview" style="max-width: 150px"/>
-                    </div>
                     <div class="form-group">
                         <label asp-for="MemorialPictureURL" class="control-label"></label>
                         <input asp-for="MemorialPictureURL" class="form-control" readonly>
                         <span asp-validation-for="MemorialPictureURL" class="text-danger"></span>
                     </div>
-                    <div class="form-group">
-                        <label asp-for="Name" class="control-label"></label>
-                        <input asp-for="Name" class="form-control" readonly>
-                        <span asp-validation-for="Name" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Historia" class="control-label"></label>
-                        <input asp-for="Historia" class="form-control" readonly>
-                        <span asp-validation-for="Historia" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="DataFalecimento" class="control-label"></label>
-                        <input asp-for="DataFalecimento" class="form-control" readonly>
-                        <span asp-validation-for="DataFalecimento" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Formacao" class="control-label"></label>
-                        <input asp-for="Formacao" class="form-control" readonly>
-                        <span asp-validation-for="Formacao" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Religiao" class="control-label"></label>
-                        <input asp-for="Religiao" class="form-control" readonly>
-                        <span asp-validation-for="Religiao" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Hobbies" class="control-label"></label>
-                        <input asp-for="Hobbies" class="form-control" readonly>
-                        <span asp-validation-for="Hobbies" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <a class="btn btn-outline-success float-right" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
-                        <a class="btn btn-outline-secondary" asp-action="Index">Mostre todos</a>
-                        <form asp-action="Delete">
-                            <input type="hidden" asp-for="Id" />
-                            <input type="submit" value="Confirm" class="btn btn-danger float-right" />
-                        </form>
-                    </div>
-                </form>
             </div>
         </div>
     </div>

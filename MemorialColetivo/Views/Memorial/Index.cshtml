@@ -1,14 +1,11 @@
 ﻿@model IEnumerable<Memorial>
-public class ArchivesViewModel
- {
-    public IEnumerable<CommModel> Model1 { get; set; }
-    public IEnumerable<MeetModel> Model2 { get; set; }
- }
+
 @{
     ViewData["Title"] = "List of Memorials";
 }
 
 <div style="margin:10px;" class="text-white">
+        <h2 style="color:black;">Seus Memoriais</h2>
     <a asp-controller="Memorial" asp-action="Create" class="btn btn-success"><i class="bi bi-plus-circle"></i> Criar um memorial</a>
 </div>
 <div class="row">
