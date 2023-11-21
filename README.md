@@ -1,4 +1,4 @@
-# Collective Digital Memorial - Vaadin Tools Test
+# About this project
 
 - **Source**:
   - ASP.NET Core ([link](https://dotnet.microsoft.com/apps/aspnet));
