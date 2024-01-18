@@ -3,7 +3,14 @@
 @{
     ViewData["Title"] = "Crie um novo memorial";
 }
-
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Editar Perfil</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <!-- Button trigger modal -->
+    <!-- Adicione outros estilos conforme necessário -->
 <style>
     .person-container {
         display: flex;
@@ -36,6 +43,11 @@
         margin-bottom: 5px;
     }
 
+    .person-name-title {
+        font-size: 30px;
+        margin-left: 20px;
+        margin-bottom: 5px;
+    }
     .edit-button {
         background-color: #007bff;
         color: #fff;
@@ -44,9 +56,40 @@
         padding: 5px 10px;
         border-radius: 3px;
         cursor: pointer;
+    }
+    /* Botões de cores */
+    .color-buttons {
+        margin-top: 20px;
+    }
 
+    .color-button {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        margin-right: 10px;
+        cursor: pointer;
+        background-color: #ccc; /* Cor de fundo padrão, pode ser ajustada conforme necessário */
+        display: inline-block;
+    }
+
+    .change-color {
+        transition: background-color 0.3s ease;
+    }
+
+    .blue-color .change-color {
+        background-color: blue !important;
+    }
+
+    .red-color .change-color {
+        background-color: red !important;
+    }
+
+    .yellow-color .change-color {
+        background-color: yellow !important;
     }
 </style>
+    </head>
+    <body>
 <div class="row text">
     <div style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
         <div style="width:75%;height:25%;">
@@ -54,35 +97,35 @@
                 <div class="person-container" style="margin-bottom:20px;">
                     <img id="ProfilePicturePreview" style="max-width: 150px" />
                     <div class="person-info">
-                        <div class="person-name">@Model.Name</div>
-                        <a class="btn btn-outline-success float-right edit-button" asp-action="Edit" asp-route-id="@Model.Id">Editar memorial</a>
+                        <div class="person-name-title">@Model.Name</div>
+                        <a class="btn btn-outline-success float-right edit-button change-color" asp-action="Edit" asp-route-id="@Model.Id">Editar memorial</a>
                         <a class="btn btn-outline-success float-right bi bi-share" asp-action="Edit" asp-route-id="@Model.Id"></a>
                     </div>
                 </div>
             </div>
+
             <div class="row mb-3" style="margin-left: 150px;">
                 <div class="col-md-9">
                     <div class="btn-group" role="group" aria-label="Selecionar modo">
-                        <button type="button" class="btn btn-primary btn-large">Biografia</button>
-                        <button type="button" class="btn btn-primary btn-large ">Memórias</button>
-                        <button type="button" class="btn btn-primary btn-large">Espaço de Homenagens</button>
+                        <button type="button" class="btn btn-primary btn-large change-color" data-section="biography">Biografia</button>
+                        <button type="button" class="btn btn-primary btn-large change-color" data-section="media">Memórias</button>
+                        <button type="button" class="btn btn-primary btn-large change-color" data-section="space">Espaço de Homenagens</button>
                     </div>
                 </div>
             </div>
-            <!-- Primeiro item -->
-            <div class="row mb-3" style="margin-left:150px;">
+
+            <div class="row mb-3 memorial-section" style="margin-left:150px;">
                 <div class="col-md-9">
-                    <div class=" border p-3">
+                    <div class="border p-3">
                         <div class="person-info">
-                            <div class="person-name">Historia</div>
+                            <div class="person-name">História</div>
                             <h5 class="item-title mt-3 text-justify" style="margin-left:20px;">@Model.Historia</h5>
-                            <button class="edit-button" style="width:97%;">Ver mais sobre a historia de @Model.Name</button>
+                                <button class="edit-button change-color" style="width:97%;" onclick="openPopup()">Ver mais sobre a história de @Model.Name</button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Itens em formato de grade 2 por 2 -->
             <div class="row" style="margin-left:150px;">
                 <div class="col-md-5">
                     <div class="person-container">
@@ -94,7 +137,7 @@
                     </div>
                 </div>
                 <div class="col-md-5" style="margin-left:50px;max-width:100px;">
-                    <div class="person-container" >
+                    <div class="person-container">
                         <div class="person-info">
                             <div class="person-name" style="margin-left:20px;">Formações</div>
                             <h5 class="item-title mt-3" style="margin-left:20px;">Arquitetura de ambientes, USP</h5>
@@ -102,6 +145,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="row" style="margin-left:150px;">
                 <div class="col-md-5">
                     <div class="person-container">
@@ -120,28 +164,119 @@
                     </div>
                 </div>
             </div>
-            <!-- Repita este bloco para cada par de itens -->
+
         </div>
     </div>
 </div>
 
+<div class="row mb-3 memorial-section text-center" id="memorial-media-section" style="margin-left:190px; margin-top:65px;">
+
+    <div class="col-md-12">
+        <h3>Fotos e Vídeos</h3>
+    </div>
+
+    <div class="col-md-4" style="margin-left:190px;">
+        <div class="d-flex flex-wrap">
+            <div style="width: 100px; height: 100px; overflow: hidden; border: 1px solid #ddd; margin: 5px;">
+                <img src="@Model.MemorialPictureURL" alt="Foto 1" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div style="width: 100px; height: 100px; overflow: hidden; border: 1px solid #ddd; margin: 5px;">
+                <img src="@Model.MemorialPictureURL" alt="Foto 2" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div style="width: 100px; height: 100px; overflow: hidden; border: 1px solid #ddd; margin: 5px;">
+                <img src="@Model.MemorialPictureURL" alt="Foto 3" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div style="width: 100px; height: 100px; overflow: hidden; border: 1px solid #ddd; margin: 5px;">
+                <img src="@Model.MemorialPictureURL" alt="Foto 4" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+        </div>
+    </div>
+    <!-- Adicione mais imagens e vídeos conforme necessário -->
+</div>
+
+
+
 <div class="col-md-8 offset-2" style="margin-top:1000px; margin-bottom:1000px;">
-        <div class="row">
-            <div class="col-md-8 offset-2">
-                    <div class="form-group">
-                        <label asp-for="MemorialPictureURL" class="control-label"></label>
-                        <input asp-for="MemorialPictureURL" class="form-control" readonly>
-                        <span asp-validation-for="MemorialPictureURL" class="text-danger"></span>
-                    </div>
+    <div class="row">
+        <div class="col-md-8 offset-2">
+            <div class="form-group">
+                <label asp-for="MemorialPictureURL" class="control-label"></label>
+                <input asp-for="MemorialPictureURL" class="form-control" readonly>
+                <span asp-validation-for="MemorialPictureURL" class="text-danger"></span>
             </div>
         </div>
     </div>
 </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@2.11.6/dist/umd/popper.min.js" integrity="sha384-b12n3kVUdFjmO6IPYl8v2wWqQZ8yVHW6HO4Bsce8xj1jgrvqwe1DB5M/1OQm8fGt" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyUEHsmsLlqLs2tnGdC5l/rh2v9tJZhZ9w" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 @section Scripts{
+    
+
+        <!-- Your custom scripts -->
+    <script>
+            function openPopup() {
+                var historiaCompleta = "@Model.Historia"; // Obtenha a história completa do modelo
+
+                // Abra uma nova janela pop-up com a história
+                var popupWindow = window.open('', '_blank', 'width=600,height=400,scrollbars=yes,resizable=yes');
+                popupWindow.document.write('<html><head><title>História completa de ' + '@Model.Name' + '</title></head><body>');
+                popupWindow.document.write('<h1>História completa de ' + '@Model.Name' + '</h1>');
+                popupWindow.document.write('<p>' + historiaCompleta + '</p>');
+                popupWindow.document.write('</body></html>');
+                popupWindow.document.close();
+            }
+        // Função para definir a cor e armazenar no cookie
+        function changeColor(color) {
+            document.body.className = color + "-color";
+            document.cookie = "chosenColor=" + color + "; path=/"; // Armazena a cor escolhida em um cookie
+        }
+
+        // Função para obter a cor armazenada no cookie
+        function getChosenColor() {
+            var match = document.cookie.match(new RegExp('(^| )chosenColor=([^;]+)'));
+            return match ? match[2] : null;
+        }
+
+        // Define a cor armazenada, se existir
+        var storedColor = getChosenColor();
+        if (storedColor) {
+            changeColor(storedColor);
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
         $(document).ready(function () {
+            // Ocultar a seção de fotos e vídeos inicialmente
+            $('#memorial-media-section').hide();
+
+            // Exibir a seção correta ao clicar nos botões
+            $('.btn-group button').click(function () {
+                var section = $(this).data('section');
+                toggleMemorialSection(section);
+            });
+
+            function toggleMemorialSection(section) {
+                if (section === 'media') {
+                    $('.memorial-section').hide();
+                    $('#memorial-media-section').show();
+                    $('.person-name').hide(); // Ocultar elementos com a classe "person-name"
+                    $('.item-title').hide(); // Ocultar elementos com a classe "person-name"
+                } else {
+                    $('.memorial-section').show();
+                    $('#memorial-media-section').hide();
+                    $('.person-name').show(); // Exibir elementos com a classe "person-name"
+                    $('.item-title').show(); // Ocultar elementos com a classe "person-name"
+                }
+            }
+
+            // Carregar a imagem do perfil
             var output = document.getElementById('ProfilePicturePreview');
-        output.src = $("#MemorialPictureURL").val();
-        })
+            output.src = $("#MemorialPictureURL").val();
+        });
     </script>
 }
+
+</body>
+</html>

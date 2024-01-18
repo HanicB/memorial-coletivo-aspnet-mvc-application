@@ -14,26 +14,44 @@ namespace MemorialColetivo.Data.Services
         {
             throw new NotImplementedException();
         }
-
-        public void Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<IEnumerable<Usuario>> getAll()
+        public async Task<IEnumerable<Usuario>> GetAll()
         {
             var result = await _context.Usuario.ToListAsync();
             return result;
         }
 
-        public Usuario GetById(int id)
+        public async Task<Usuario> GetById(int id)
         {
-            throw new NotImplementedException();
+            var usuario = await _context.Usuario.FindAsync(id);
+            return usuario;
         }
 
+
+        // Implemente o método no UsuariosService.cs
         public Usuario Update(int id, Usuario newUsuario)
         {
-            throw new NotImplementedException();
+            var existingUsuario = _context.Usuario.Find(id);
+
+            if (existingUsuario != null)
+            {
+                existingUsuario.ProfilePictureURL = newUsuario.ProfilePictureURL;
+                existingUsuario.FullName = newUsuario.FullName;
+                existingUsuario.Bio = newUsuario.Bio;
+
+                _context.SaveChanges();
+            }
+
+            return existingUsuario;
+        }
+        public void Delete(int id)
+        {
+            var usuario = _context.Usuario.Find(id);
+
+            if (usuario != null)
+            {
+                _context.Usuario.Remove(usuario);
+                _context.SaveChanges();
+            }
         }
     }
 }

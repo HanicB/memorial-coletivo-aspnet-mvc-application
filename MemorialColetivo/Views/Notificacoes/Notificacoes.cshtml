@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notificações</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyUEHsmsLlqLs2tnGdC5l/rh2v9tJZhZ9w" crossorigin="anonymous">
+    <!-- Adicione outros estilos conforme necessário -->
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .notification-container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+            border-radius: 10px;
+            position: relative; /* Adiciona posição relativa para o posicionamento absoluto do laço */
+        }
+
+        .notification-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .notification-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-right: 20px;
+            overflow: hidden;
+            position: relative;
+            border: 3px solid #fff;
+        }
+
+            .notification-image img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+        .notification-ribbon {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-image: url('https://i.imgur.com/w0PXAdz.png');
+            background-size: cover;
+            bottom: -5px;
+            right: -5px;
+            z-index: 1;
+        }
+
+        .notification-item .notification-text {
+            flex: 1;
+        }
+
+        /* Adiciona a classe para a imagem no canto inferior direito */
+        .corner-image {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 30px;
+            height: 30px;
+            background-image: url('caminho-da-sua-imagem.png'); /* Substitua pelo caminho da sua imagem */
+            background-size: cover;
+            border-radius: 0; /* Remove a borda circular */
+        }
+    </style>
+</head>
+<body>
+    <div class="notification-container">
+        <a href="@Url.Action("Details", "Memorial", new { id = 1 })" style="text-decoration: none; color: inherit;">
+        <div class="notification-item">
+            <div class="notification-image">
+                <img src="https://dotnethow.net/images/actors/actor-5.jpeg" alt="Foto 1" />
+            </div>
+            <div class="notification-image">
+                <img src="https://dotnethow.net/images/actors/actor-3.jpeg" alt="Foto 2" />
+                <div class="notification-ribbon"></div>
+            </div>
+            <div class="notification-text">
+                <p>Will começou a seguir o memorial de Aly</p>
+            </div>
+        </div>
+        </a>
+    </div>
+    <div class="notification-container" >
+        <a href="@Url.Action("Details", "Memorial", new { id = 2 })" style="text-decoration: none; color: inherit;">
+        <div class="notification-item">
+            <div class="notification-image">
+                <img src="https://dotnethow.net/images/actors/actor-1.jpeg" alt="Foto 1" />
+                <div class="notification-ribbon"></div>
+            </div>
+            <div class="notification-text">
+                <p>Hoje faz 1 ano desde que Matty nos deixou, relembre algumas memorias acessando o memorial dele.</p>
+            </div>
+        </div>
+        </a>
+    </div>
+    <!-- Adicione outros scripts conforme necessário -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@2.11.6/dist/umd/popper.min.js" integrity="sha384-b12n3kVUdFjmO6IPYl8v2wWqQZ8yVHW6HO4Bsce8xj1jgrvqwe1DB5M/1OQm8fGt" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyUEHsmsLlqLs2tnGdC5l/rh2v9tJZhZ9w" crossorigin="anonymous"></script>
+</body>
+</html>
