@@ -5,7 +5,7 @@
   - Digital memorials: classifications and design recommendations ([link](https://sol.sbc.org.br/journals/index.php/jis/article/view/2567));
  
 ## **Prototypes:**
-[System prototype](https://dl.acm.org/doi/10.1145/3658271.3658301) Study with the artifacts (Requirements, prototypes, and tests) made for the system and published in an international conference.
+System prototype ([link](https://dl.acm.org/doi/10.1145/3658271.3658301)): Study with the artifacts (Requirements, prototypes, and tests) made for the system and published in an international conference.
 
 ## **Context:**
 [ASP.NET Core](https://dotnet.microsoft.com/apps/aspnet) is designed to enable rapid evolution of runtime components, APIs, compilers, and languages while still providing a stable and supported platform to keep applications running.
